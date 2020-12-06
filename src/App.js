@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Section from './Components/Section/Section';
-import FeedbackOptions from './Components/FeedbackOptions/FeedbackOptions';
-import Statistics from './Components/Statistics/Statistics';
-import Notification from './Components/Notification/Notification';
+import Section from './Components/Section';
+import FeedbackOptions from './Components/FeedbackOptions';
+import Statistics from './Components/Statistics';
+import Notification from './Components/Notification';
 import s from './App.module.css';
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
   };
 
   handleClick = evt => {
-    const name = evt.target.textContent.toLowerCase();
+    const name = evt.target.name;
 
     this.setState(prevState => {
       return { [name]: prevState[name] + 1 };
@@ -39,7 +39,10 @@ class App extends Component {
         <h1 className={s.header}>Task 1. Feedback form</h1>
         <div className={s.feedbackForm}>
           <Section title="Please leave feedback:">
-            <FeedbackOptions onLeaveFeedback={this.handleClick} />
+            <FeedbackOptions
+              options={this.state}
+              onLeaveFeedback={this.handleClick}
+            />
           </Section>
           <Section title="Statistics:">
             {this.countTotalFeedback() ? (
